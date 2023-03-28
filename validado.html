@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es" class="notranslate" translate="no">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Michelin Wifi</title>
+</head>
+<body>
+    <img src="Michelin-Logo-PNG_2.png" alt="" srcset="" class="logoTitulo">
+    <hr class="divisionAmarilloArriba">
+    <div class="divCentrado">
+        <span class="textoTitulo">WIFI</span>
+    </div>
+    <hr class="divisionAmarilloAbajo">
+    <p class="texto">Registro Correcto!</p>
+    <br>
+    <p class="texto">Ya puedes acceder a nuestra red WIFI durante el evento</p>
+    <div class="centrado">
+        <a href="https://www.michelin.com.mx/">
+            <button class="boton">Acceder Wifi</button>
+        </a>
+    </div>
+    <script>
+        function token(){
+            window.location.href = 'https://www.michelin.com.mx/';
+        }
+
+        async function realizaLogin(){
+
+            const data = {
+                    "command" : "login",
+                    "username" : "",
+                    "password" : "",
+                    "orig_url" : "http%3A%2F%2Fgoogle.com"
+                }
+                const dataJson = JSON.stringify(data)
+
+                const settings = {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                 body: 
+                    dataJson
+                 };
+
+                 const formData = new FormData();
+                 formData.append("command" , "login");
+                 let user = prompt("Dame el username:")
+                 formData.append("username" , user);
+                 let pass = prompt("Dame el password:")
+                 formData.append("password" , pass);
+                 formData.append("orig_url" , "http%3A%2F%2Fgoogle.com");
+
+                 const request = new XMLHttpRequest();
+                request.open("POST", "https://captive-portal.peplink.com:8000/portal.cgi");
+                request.send(formData);
+
+                alert("mensaje enviado")
+                console.log({formData})
+        }
+    </script>
+</body>
+</html>
